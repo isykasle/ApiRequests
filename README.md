@@ -30,9 +30,7 @@ This is installing all the dependencies of the project.
  
 DDL database schema:
 
-The ddl database schema of moviedb database is the
-zip file named workable_assignment_Yannis_Sykas_Leriotis,which is the 
-deliverable of all the tasks.
+The ddl database schema of moviedb database is the moviedb.sql file
 
 To run the project: 
 
