@@ -34,9 +34,10 @@ The ddl database schema of moviedb database is the moviedb.sql file
 
 To run the project: 
 
-1.Load the ddl database schema in pgadmin.
-Find useful ways to do that in 
-http://www.postgresqltutorial.com/postgresqlΒ­sampleΒ­database/ .
+1.Load the ddl database schema in a Postgres database.
+Create a database named moviedb. Copy and run the commands from the file moviedb.sql
+Or load them in the database moviedb.
+
 
 2.Run the Python application: 
   
