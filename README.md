@@ -1,4 +1,4 @@
-#A database of current movies playing in Greek theaters  
+# A database of current movies playing in Greek theaters  
 A python app that requests data from the Movie database API,using the https://www.themoviedb.org/ API,appends these data to a SQL database.
 
 The project is developed in Python 3.7.11 version.
