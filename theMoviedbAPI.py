@@ -99,7 +99,6 @@ def build_director_imdb_link(director_id):
     responses1 = {}
     person = {}
     imdb_links = {}
-    count=0
 
     for d in range(len(director_id)):
         query3 = 'https://api.themoviedb.org/3/person/'+str(director_id[d]) + \
@@ -116,7 +115,7 @@ def build_director_imdb_link(director_id):
                 imdb_ids[d] = person[d]['imdb_id']
 
                 imdb_links[d] = 'https://www.imdb.com/name/'+imdb_ids[d]+'/'
-                count += 1
+               
             else:
                 imdb_ids[d] = 'Not Found'
 
