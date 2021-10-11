@@ -2,8 +2,12 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
+from ratelimit import limits, sleep_and_retry
 
 load_dotenv()
+FIVE_MINUTES = 300
+
+
 
 """
  * The method queries the movies which play from 2021-09-02 to 2021-09-15 
@@ -14,7 +18,8 @@ load_dotenv()
  @return: list description: a list of strings of descriptions of movies
  """
 
-
+@sleep_and_retry
+@limits(calls=30, period=FIVE_MINUTES)
 def get_movie_details():
 
     query = 'https://api.themoviedb.org/3/discover/movie?api_key='+os.getenv('API_key')+'&region=GR' \
@@ -54,7 +59,8 @@ def get_movie_details():
  @return: list director_names: a list of strings of names of directors
  """
 
-
+@sleep_and_retry
+@limits(calls=30, period=FIVE_MINUTES)
 def get_director_details(movie_ids):
     responses = {}
     movies = {}
@@ -92,7 +98,8 @@ def get_director_details(movie_ids):
 
  """
 
-
+@sleep_and_retry
+@limits(calls=30, period=FIVE_MINUTES)
 def build_director_imdb_link(director_id):
 
     imdb_ids = {}
@@ -115,7 +122,8 @@ def build_director_imdb_link(director_id):
                 imdb_ids[d] = person[d]['imdb_id']
 
                 imdb_links[d] = 'https://www.imdb.com/name/'+imdb_ids[d]+'/'
-               
+
+                
             else:
                 imdb_ids[d] = 'Not Found'
 
@@ -124,3 +132,5 @@ def build_director_imdb_link(director_id):
         else:
             print("error")
     return imdb_links
+
+
