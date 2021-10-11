@@ -18,8 +18,8 @@ load_dotenv()
 def get_movie_details():
 
     query = 'https://api.themoviedb.org/3/discover/movie?api_key='+os.getenv('API_key')+'&region=GR' \
-           '&release_date.gte=2021-09-02&' \
-            '%release_date.lte=2021-09-15&with_release_type=2|3'
+           '&release_date.gte=2021-10-01&' \
+            '%release_date.lte=2021-10-15&with_release_type=2|3'
 
     response = requests.get(query)
 
@@ -72,6 +72,7 @@ def get_director_details(movie_ids):
             text = json.dumps(array)
             movies[d] = json.loads(text)
             crew[d] = movies[d]['crew']
+
             for j in range(len(crew[d])):
                 if crew[d][j]['job'] == 'Director':
                     directors_ids[d] = crew[d][j]['id']
@@ -98,6 +99,7 @@ def build_director_imdb_link(director_id):
     responses1 = {}
     person = {}
     imdb_links = {}
+    count=0
 
     for d in range(len(director_id)):
         query3 = 'https://api.themoviedb.org/3/person/'+str(director_id[d]) + \
@@ -107,15 +109,19 @@ def build_director_imdb_link(director_id):
             an_array = responses1[d].json()
             a_text = json.dumps(an_array)
             person[d] = json.loads(a_text)
-            print(person[d])
-            imdb_ids[d] = person[d]['imdb_id']
-            imdb_links[d] = 'https://www.imdb.com/name/'+imdb_ids[d]+'/'
+
+
+
+            if(person[d]['imdb_id']!=None):
+                imdb_ids[d] = person[d]['imdb_id']
+
+                imdb_links[d] = 'https://www.imdb.com/name/'+imdb_ids[d]+'/'
+                count += 1
+            else:
+                imdb_ids[d] = 'Not Found'
+
+                imdb_links[d] = 'Not Found'
+
         else:
             print("error")
     return imdb_links
-
-
-
-
-
-
