@@ -123,6 +123,7 @@ def build_director_imdb_link(director_id):
 
                 imdb_links[d] = 'https://www.imdb.com/name/'+imdb_ids[d]+'/'
 
+                
             else:
                 imdb_ids[d] = 'Not Found'
 
